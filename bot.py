@@ -91,10 +91,10 @@ async def hourly_notification():
             inline=False
         )
 
-        embed.set_footer(text="Crew Lord of Ciara | Biệt đội tiêu diệt scamer")
+        embed.set_footer(text="Crew Lord of Ciara | Biệt đội tiêu diệt scamer | Tự ý giao dịch bị scam BQT không chịu mọi trách nhiệm")
 
         await channel.send(
-            content="⚠️ **@everyone THÔNG BÁO QUAN TRỌNG**",
+            content="⚠️ ** THÔNG BÁO QUAN TRỌNG**",
             embed=embed,
             allowed_mentions=discord.AllowedMentions(everyone=True)
         )
