@@ -74,24 +74,24 @@ async def hourly_notification():
 
         embed = discord.Embed(
             title="🚨 CẢNH BÁO SCAM - LORD OF CIARA 🚨",
-            description="⚠️ **KHÔNG GIAO DỊCH NGOÀI HỆ THỐNG** ⚠️",
+            description="⚠️ **KHÔNG GIAO DỊCH VỚI NGƯỜI LẠ** ⚠️",
             color=0xFF0000,
             timestamp=datetime.now()
         )
 
         embed.add_field(
             name="❌ TUYỆT ĐỐI KHÔNG",
-            value="• Giao dịch riêng\n• Cho mượn đồ\n• Tin lời hứa miệng",
+            value="• Giao dịch riêng\n• Cho mượn đồ\n• Tin lời hứa miệng - Cho mượn Ingame OTT,...\n",
             inline=False
         )
 
         embed.add_field(
             name="✅ LUÔN GHI NHỚ",
-            value="• Giao dịch qua Admin\n• Chụp bằng chứng\n• Báo ngay khi nghi ngờ",
+            value="• Giao dịch qua Ban Quản Trị - Quản lý Crew\n• Chụp bằng chứng\n• Báo ngay khi nghi ngờ",
             inline=False
         )
 
-        embed.set_footer(text="Gangs Lord of Ciara | Anti Scam")
+        embed.set_footer(text="Crew Lord of Ciara | Biệt đội tiêu diệt scamer")
 
         await channel.send(
             content="⚠️ **@everyone THÔNG BÁO QUAN TRỌNG**",
