@@ -72,7 +72,7 @@ async def hourly_notification():
         if not channel:
             return
 
-        embed = discord.Embed(
+    embed = discord.Embed(
     title="🚨 CẢNH BÁO SCAM - LORD OF CIARA 🚨",
     description="⚠️ **KHÔNG GIAO DỊCH VỚI NGƯỜI LẠ** ⚠️",
     color=0xFF0000,
