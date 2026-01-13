@@ -10,11 +10,7 @@ import traceback
 # ==================== CONFIG ====================
 TOKEN = os.getenv("DISCORD_TOKEN")
 CHANNEL_ID = int(os.getenv("CHANNEL_ID", "0"))
-
-# Role được phép dùng lệnh /on /off (ĐỔI TÊN ROLE NẾU MUỐN)
 ADMIN_ROLE_NAME = "Admin"
-
-# Chống spam: mỗi user 1 lệnh / 10 giây
 COOLDOWN_SECONDS = 10
 
 # ==================== INTENTS ====================
@@ -72,58 +68,58 @@ async def hourly_notification():
         if not channel:
             return
 
-    embed = discord.Embed(
-    title="🚨 CẢNH BÁO SCAM - LORD OF CIARA 🚨",
-    description="⚠️ **KHÔNG GIAO DỊCH VỚI NGƯỜI LẠ** ⚠️",
-    color=0xFF0000,
-    timestamp=datetime.now()
-)
+        embed = discord.Embed(
+            title="🚨 CẢNH BÁO SCAM - LORD OF CIARA 🚨",
+            description="⚠️ **KHÔNG GIAO DỊCH VỚI NGƯỜI LẠ** ⚠️",
+            color=0xFF0000,
+            timestamp=datetime.now()
+        )
 
-embed.add_field(
-    name="❌ TUYỆT ĐỐI KHÔNG",
-    value=(
-        "• Giao dịch riêng\n"
-        "• Cho mượn đồ\n"
-        "• Tin lời hứa miệng\n"
-        "• Cho mượn Ingame / OTT / tài sản\n"
-    ),
-    inline=False
-)
+        embed.add_field(
+            name="❌ TUYỆT ĐỐI KHÔNG",
+            value=(
+                "• Giao dịch riêng\n"
+                "• Cho mượn đồ\n"
+                "• Tin lời hứa miệng\n"
+                "• Cho mượn Ingame / OTT / tài sản\n"
+            ),
+            inline=False
+        )
 
-embed.add_field(
-    name="🚫 SCAM QUỸ / CHIẾM ĐOẠT",
-    value=(
-        "**➡️ BAN ACC VĨNH VIỄN – KHÔNG XÉT LÝ DO**\n"
-        "**➡️ MUA GÌ TỰ CỐNG TIỀN VÀO – KHÔNG HOÀN TRẢ**\n"
-        "**➡️ TIỀN TRONG QUỸ (QUỸ CĐ) TUYỆT ĐỐI KHÔNG ĐƯỢC HEAL / HOÀN / BÙ**"
-    ),
-    inline=False
-)
+        embed.add_field(
+            name="🚫 SCAM QUỸ / CHIẾM ĐOẠT",
+            value=(
+                "**➡️ BAN ACC VĨNH VIỄN – KHÔNG XÉT LÝ DO**\n"
+                "**➡️ MUA GÌ TỰ CỐNG TIỀN VÀO – KHÔNG HOÀN TRẢ**\n"
+                "**➡️ TIỀN TRONG QUỸ (QUỸ CĐ) TUYỆT ĐỐI KHÔNG ĐƯỢC HEAL / HOÀN / BÙ**"
+            ),
+            inline=False
+        )
 
-embed.add_field(
-    name="✅ LUÔN GHI NHỚ",
-    value=(
-        "• Giao dịch qua Ban Quản Trị / Quản lý Crew\n"
-        "• Chụp lại đầy đủ bằng chứng\n"
-        "• Báo ngay khi có dấu hiệu nghi ngờ"
-    ),
-    inline=False
-)
+        embed.add_field(
+            name="✅ LUÔN GHI NHỚ",
+            value=(
+                "• Giao dịch qua Ban Quản Trị / Quản lý Crew\n"
+                "• Chụp lại đầy đủ bằng chứng\n"
+                "• Báo ngay khi có dấu hiệu nghi ngờ"
+            ),
+            inline=False
+        )
 
-embed.set_footer(
-    text="Crew Lord of Ciara | Biệt đội tiêu diệt scammer | Tự ý giao dịch bị scam BQT không chịu trách nhiệm"
-)
+        embed.set_footer(
+            text="Crew Lord of Ciara | Biệt đội tiêu diệt scammer | Tự ý giao dịch bị scam BQT không chịu trách nhiệm"
+        )
 
         await channel.send(
-            content="⚠️ ** THÔNG BÁO QUAN TRỌNG**",
-            embed=embed,
-            allowed_mentions=discord.AllowedMentions(everyone=True)
+            content="⚠️ **THÔNG BÁO QUAN TRỌNG**",
+            embed=embed
         )
 
         print("✅ Đã gửi thông báo tự động")
 
     except Exception as e:
         print(f"❌ Lỗi hourly_notification: {e}")
+        traceback.print_exc()
 
 @hourly_notification.before_loop
 async def before_hourly():
@@ -131,73 +127,29 @@ async def before_hourly():
     print("🔔 Task thông báo mỗi 1 tiếng đã sẵn sàng")
 
 # ==================== SLASH COMMANDS ====================
-
 @bot.tree.command(name="on", description="Bật thông báo tự động")
 async def on_notify(interaction: discord.Interaction):
     global notification_enabled
-
     if not is_admin(interaction.user):
-        await interaction.response.send_message(
-            "❌ Bạn không có quyền dùng lệnh này",
-            ephemeral=True
-        )
+        await interaction.response.send_message("❌ Bạn không có quyền", ephemeral=True)
         return
-
-    ok, wait = check_cooldown(interaction.user.id)
-    if not ok:
-        await interaction.response.send_message(
-            f"⏳ Đợi {wait}s rồi thử lại",
-            ephemeral=True
-        )
-        return
-
     notification_enabled = True
-    await interaction.response.send_message(
-        "✅ Đã **BẬT** thông báo tự động",
-        ephemeral=True
-    )
+    await interaction.response.send_message("✅ Đã bật thông báo", ephemeral=True)
 
 @bot.tree.command(name="off", description="Tắt thông báo tự động")
 async def off_notify(interaction: discord.Interaction):
     global notification_enabled
-
     if not is_admin(interaction.user):
-        await interaction.response.send_message(
-            "❌ Bạn không có quyền dùng lệnh này",
-            ephemeral=True
-        )
+        await interaction.response.send_message("❌ Bạn không có quyền", ephemeral=True)
         return
-
-    ok, wait = check_cooldown(interaction.user.id)
-    if not ok:
-        await interaction.response.send_message(
-            f"⏳ Đợi {wait}s rồi thử lại",
-            ephemeral=True
-        )
-        return
-
     notification_enabled = False
-    await interaction.response.send_message(
-        "⛔ Đã **TẮT** thông báo tự động",
-        ephemeral=True
-    )
+    await interaction.response.send_message("⛔ Đã tắt thông báo", ephemeral=True)
 
-@bot.tree.command(name="status", description="Kiểm tra trạng thái bot")
+@bot.tree.command(name="status", description="Kiểm tra trạng thái")
 async def status(interaction: discord.Interaction):
-    state = "🟢 ĐANG BẬT" if notification_enabled else "🔴 ĐANG TẮT"
-    await interaction.response.send_message(
-        f"📊 Trạng thái thông báo: **{state}**",
-        ephemeral=True
-    )
+    state = "🟢 BẬT" if notification_enabled else "🔴 TẮT"
+    await interaction.response.send_message(f"📊 Trạng thái: {state}", ephemeral=True)
 
 # ==================== START ====================
 if __name__ == "__main__":
-    if not TOKEN:
-        print("❌ DISCORD_TOKEN chưa thiết lập")
-    elif CHANNEL_ID == 0:
-        print("❌ CHANNEL_ID chưa thiết lập")
-    else:
-        try:
-            bot.run(TOKEN)
-        except Exception as e:
-            print(f"❌ Bot crash: {e}")
+    bot.run(TOKEN)
