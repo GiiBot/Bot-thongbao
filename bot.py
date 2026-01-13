@@ -73,25 +73,46 @@ async def hourly_notification():
             return
 
         embed = discord.Embed(
-            title="🚨 CẢNH BÁO SCAM - LORD OF CIARA 🚨",
-            description="⚠️ **KHÔNG GIAO DỊCH VỚI NGƯỜI LẠ** ⚠️",
-            color=0xFF0000,
-            timestamp=datetime.now()
-        )
+    title="🚨 CẢNH BÁO SCAM - LORD OF CIARA 🚨",
+    description="⚠️ **KHÔNG GIAO DỊCH VỚI NGƯỜI LẠ** ⚠️",
+    color=0xFF0000,
+    timestamp=datetime.now()
+)
 
-        embed.add_field(
-            name="❌ TUYỆT ĐỐI KHÔNG",
-            value="• Giao dịch riêng\n• Cho mượn đồ\n• Tin lời hứa miệng - Cho mượn Ingame OTT,...\n",
-            inline=False
-        )
+embed.add_field(
+    name="❌ TUYỆT ĐỐI KHÔNG",
+    value=(
+        "• Giao dịch riêng\n"
+        "• Cho mượn đồ\n"
+        "• Tin lời hứa miệng\n"
+        "• Cho mượn Ingame / OTT / tài sản\n"
+    ),
+    inline=False
+)
 
-        embed.add_field(
-            name="✅ LUÔN GHI NHỚ",
-            value="• Giao dịch qua Ban Quản Trị - Quản lý Crew\n• Chụp bằng chứng\n• Báo ngay khi nghi ngờ",
-            inline=False
-        )
+embed.add_field(
+    name="🚫 SCAM QUỸ / CHIẾM ĐOẠT",
+    value=(
+        "**➡️ BAN ACC VĨNH VIỄN – KHÔNG XÉT LÝ DO**\n"
+        "**➡️ MUA GÌ TỰ CỐNG TIỀN VÀO – KHÔNG HOÀN TRẢ**\n"
+        "**➡️ TIỀN TRONG QUỸ (QUỸ CĐ) TUYỆT ĐỐI KHÔNG ĐƯỢC HEAL / HOÀN / BÙ**"
+    ),
+    inline=False
+)
 
-        embed.set_footer(text="Crew Lord of Ciara | Biệt đội tiêu diệt scamer | Tự ý giao dịch bị scam BQT không chịu mọi trách nhiệm")
+embed.add_field(
+    name="✅ LUÔN GHI NHỚ",
+    value=(
+        "• Giao dịch qua Ban Quản Trị / Quản lý Crew\n"
+        "• Chụp lại đầy đủ bằng chứng\n"
+        "• Báo ngay khi có dấu hiệu nghi ngờ"
+    ),
+    inline=False
+)
+
+embed.set_footer(
+    text="Crew Lord of Ciara | Biệt đội tiêu diệt scammer | Tự ý giao dịch bị scam BQT không chịu trách nhiệm"
+)
 
         await channel.send(
             content="⚠️ ** THÔNG BÁO QUAN TRỌNG**",
