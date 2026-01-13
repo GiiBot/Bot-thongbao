@@ -81,17 +81,17 @@ async def hourly_notification():
                 "• Giao dịch riêng\n"
                 "• Cho mượn đồ\n"
                 "• Tin lời hứa miệng\n"
-                "• Cho mượn Ingame / OTT / tài sản\n"
+                "• Cho mượn ae Ingame / OTT / tài sản\n"
             ),
             inline=False
         )
 
         embed.add_field(
-            name="🚫 SCAM QUỸ / CHIẾM ĐOẠT",
+            name="🚫 SCAM QUỸ / CHIẾM ĐOẠT QUỸ CREW",
             value=(
                 "**➡️ BAN ACC VĨNH VIỄN – KHÔNG XÉT LÝ DO**\n"
-                "**➡️ MUA GÌ TỰ CỐNG TIỀN VÀO – KHÔNG HOÀN TRẢ**\n"
-                "**➡️ TIỀN TRONG QUỸ (QUỸ CĐ) TUYỆT ĐỐI KHÔNG ĐƯỢC HEAL / HOÀN / BÙ**"
+                "**➡️ MUA GÌ TỰ CỐNG TIỀN VÀO MUA ĐÚNG SỐ TIỀN CỦA MÌNH**\n"
+                "**➡️ TIỀN TRONG QUỸ (QUỸ CĐ) TUYỆT ĐỐI KHÔNG ĐƯỢC HEAL ( chỉ heal đúng số tiền mình cống hiến vào**"
             ),
             inline=False
         )
@@ -107,7 +107,7 @@ async def hourly_notification():
         )
 
         embed.set_footer(
-            text="Crew Lord of Ciara | Biệt đội tiêu diệt scammer | Tự ý giao dịch bị scam BQT không chịu trách nhiệm"
+            text="Crew Lord of Ciara | Biệt đội tiêu diệt scammer  | Tự ý giao dịch bị scam BQT không chịu trách nhiệm"
         )
 
         await channel.send(
