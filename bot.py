@@ -127,6 +127,45 @@ async def before_hourly():
     print("🔔 Task thông báo mỗi 1 tiếng đã sẵn sàng")
 
 # ==================== SLASH COMMANDS ====================
+@bot.tree.command(
+    name="thongbao",
+    description="Gửi thông báo tự viết (in hoa, chữ to, đẹp, tag everyone)"
+)
+@app_commands.describe(noidung="Nội dung thông báo")
+async def thongbao(interaction: discord.Interaction, noidung: str):
+    if not is_admin(interaction.user):
+        await interaction.response.send_message(
+            "❌ Bạn không có quyền dùng lệnh này",
+            ephemeral=True
+        )
+        return
+
+    # Chuyển toàn bộ nội dung sang IN HOA
+    text_upper = noidung.upper()
+
+    embed = discord.Embed(
+        title="📢 THÔNG BÁO TỪ BAN QUẢN TRỊ",
+        description=f"**{text_upper}**",
+        color=0xFFD700,
+        timestamp=datetime.now()
+    )
+
+    embed.set_footer(
+        text="Crew Lord of Ciara | Thông báo chính thức"
+    )
+
+    # Gửi thông báo + tag @everyone
+    await interaction.channel.send(
+        content="@everyone",
+        embed=embed,
+        allowed_mentions=discord.AllowedMentions(everyone=True)
+    )
+
+    await interaction.response.send_message(
+        "✅ Đã gửi thông báo thành công",
+        ephemeral=True
+    )
+
 @bot.tree.command(name="on", description="Bật thông báo tự động")
 async def on_notify(interaction: discord.Interaction):
     global notification_enabled
