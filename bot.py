@@ -127,12 +127,44 @@ async def before_hourly():
     print("🔔 Task thông báo mỗi 1 tiếng đã sẵn sàng")
 
 # ==================== SLASH COMMANDS ====================
+class ThongBaoModal(discord.ui.Modal, title="🔔 GHI THÔNG BÁO CIARA"):
+    noidung = discord.ui.TextInput(
+        label="NỘI DUNG THÔNG BÁO",
+        style=discord.TextStyle.paragraph,
+        placeholder="Nhập nội dung thông báo tại đây...",
+        required=True,
+        max_length=4000
+    )
+
+    async def on_submit(self, interaction: discord.Interaction):
+        text_upper = self.noidung.value.upper()
+
+        embed = discord.Embed(
+            title="📢 THÔNG BÁO TỪ BAN QUẢN TRỊ",
+            description=f"**{text_upper}**",
+            color=0xFFD700,
+            timestamp=datetime.now()
+        )
+
+        embed.set_footer(
+            text="Crew Lord of Ciara | Thông báo chính thức"
+        )
+
+        await interaction.channel.send(
+            content="@everyone",
+            embed=embed,
+            allowed_mentions=discord.AllowedMentions(everyone=True)
+        )
+
+        await interaction.response.send_message(
+            "✅ Đã gửi thông báo thành công",
+            ephemeral=True
+        )
 @bot.tree.command(
     name="thongbao",
-    description="Gửi thông báo tự viết (in hoa, chữ to, đẹp, tag everyone)"
+    description="Mở bảng nhập thông báo (form)"
 )
-@app_commands.describe(noidung="Nội dung thông báo")
-async def thongbao(interaction: discord.Interaction, noidung: str):
+async def thongbao(interaction: discord.Interaction):
     if not is_admin(interaction.user):
         await interaction.response.send_message(
             "❌ Bạn không có quyền dùng lệnh này",
@@ -140,31 +172,8 @@ async def thongbao(interaction: discord.Interaction, noidung: str):
         )
         return
 
-    # Chuyển toàn bộ nội dung sang IN HOA
-    text_upper = noidung.upper()
+    await interaction.response.send_modal(ThongBaoModal())
 
-    embed = discord.Embed(
-        title="📢 THÔNG BÁO TỪ BAN QUẢN TRỊ",
-        description=f"**{text_upper}**",
-        color=0xFFD700,
-        timestamp=datetime.now()
-    )
-
-    embed.set_footer(
-        text="Crew Lord of Ciara | Thông báo chính thức"
-    )
-
-    # Gửi thông báo + tag @everyone
-    await interaction.channel.send(
-        content="@everyone",
-        embed=embed,
-        allowed_mentions=discord.AllowedMentions(everyone=True)
-    )
-
-    await interaction.response.send_message(
-        "✅ Đã gửi thông báo thành công",
-        ephemeral=True
-    )
 
 @bot.tree.command(name="on", description="Bật thông báo tự động")
 async def on_notify(interaction: discord.Interaction):
