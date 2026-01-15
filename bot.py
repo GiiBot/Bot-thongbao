@@ -68,72 +68,78 @@ async def hourly_notification():
         if not channel:
             return
 
-        from datetime import datetime
-        import discord
+        embed = discord.Embed(
+            title="🚨 CẢNH BÁO - LORD OF CIARA - 🚨",
+            description="⚠️ **KHÔNG GIAO DỊCH VỚI NGƯỜI LẠ – KHÔNG CÓ NGOẠI LỆ VỚI NGƯỜI TRONG CREW ** ⚠️",
+            color=0xFF0000,
+            timestamp=datetime.now()
+        )
 
-embed = discord.Embed(
-    title="🚨 CẢNH BÁO - LORD OF CIARA - 🚨",
-    description="⚠️ **KHÔNG GIAO DỊCH VỚI NGƯỜI LẠ – KHÔNG CÓ NGOẠI LỆ VỚI NGƯỜI TRONG CREW ** ⚠️",
-    color=0xFF0000,
-    timestamp=datetime.now()
-)
+        # ================= TUYỆT ĐỐI KHÔNG =================
+        embed.add_field(
+            name="❌ TUYỆT ĐỐI KHÔNG",
+            value=(
+                "• Giao dịch riêng với người ngoài\n"
+                "• Cho mượn tiền / đồ / tài sản trong game (ngoài)\n"
+                "• Tin lời hứa miệng – không bằng chứng\n"
+                "• Cho mượn acc, tiền Ingame / OTT / thời trang\n"
+            ),
+            inline=False
+        )
 
-# ================= TUYỆT ĐỐI KHÔNG =================
-embed.add_field(
-    name="❌ TUYỆT ĐỐI KHÔNG",
-    value=(
-        "• Giao dịch riêng với người ngoài\n"
-        "• Cho mượn tiền / đồ / tài sản trong game (ngoài)\n"
-        "• Tin lời hứa miệng – không bằng chứng\n"
-        "• Cho mượn acc, tiền Ingame / OTT / thời trang\n"
-    ),
-    inline=False
-)
+        # ================= SCAM QUỸ =================
+        embed.add_field(
+            name="🚫 SCAM QUỸ / CHIẾM ĐOẠT QUỸ CHIẾM ĐÓNG",
+            value=(
+                "🔥 **BAN ACC VĨNH VIỄN – KHÔNG XÉT LÝ DO**\n"
+                "🔥 **KHÔNG HỖ TRỢ – KHÔNG GIẢI TRÌNH**\n"
+                "💰 **MUA GÌ → TỰ CỐNG TIỀN CỦA MÌNH → MUA ĐÚNG GIÁ TRỊ TIỀN CỐNG VÀO**\n"
+                "🏦 **TIỀN TRONG QUỸ (QUỸ CĐ) TUYỆT ĐỐI KHÔNG ĐƯỢC HEAL**\n"
+                "⚠️ **CHỈ ĐƯỢC HEAL ĐÚNG SỐ TIỀN CÁ NHÂN ĐÃ CỐNG HIẾN**"
+            ),
+            inline=False
+        )
 
-# ================= SCAM QUỸ =================
-embed.add_field(
-    name="🚫 SCAM QUỸ / CHIẾM ĐOẠT QUỸ CHIẾM ĐÓNG",
-    value=(
-        "🔥 **BAN ACC VĨNH VIỄN – KHÔNG XÉT LÝ DO**\n"
-        "🔥 **KHÔNG HỖ TRỢ – KHÔNG GIẢI TRÌNH**\n"
-        "💰 **MUA GÌ → TỰ CỐNG TIỀN CỦA MÌNH → MUA ĐÚNG GIÁ TRỊ TIỀN CỐNG VÀO**\n"
-        "🏦 **TIỀN TRONG QUỸ (QUỸ CĐ) TUYỆT ĐỐI KHÔNG ĐƯỢC HEAL**\n"
-        "⚠️ **CHỈ ĐƯỢC HEAL ĐÚNG SỐ TIỀN CÁ NHÂN ĐÃ CỐNG HIẾN**"
-    ),
-    inline=False
-)
+        # ================= LUÔN GHI NHỚ =================
+        embed.add_field(
+            name="✅ LUÔN GHI NHỚ",
+            value=(
+                "• Mọi giao dịch phải thông qua @Ban Quản Trị Crew\n"
+                "• Chụp lại đầy đủ bằng chứng (ảnh, clip,...)\n"
+                "• Báo ngay khi có dấu hiệu nghi ngờ\n"
+                "• Tự ý giao dịch → tự chịu trách nhiệm"
+            ),
+            inline=False
+        )
 
-# ================= LUÔN GHI NHỚ =================
-embed.add_field(
-    name="✅ LUÔN GHI NHỚ",
-    value=(
-        "• Mọi giao dịch phải thông qua @Ban Quản Trị Crew\n"
-        "• Chụp lại đầy đủ bằng chứng (ảnh, clip,...)\n"
-        "• Báo ngay khi có dấu hiệu nghi ngờ\n"
-        "• Tự ý giao dịch → tự chịu trách nhiệm"
-    ),
-    inline=False
-)
+        # ================= ROLE CREW =================
+        embed.add_field(
+            name="🏷️ HỆ THỐNG CHỨC VỤ & XẾP HẠNG – LORD OF CIARA",
+            value=(
+                "👑 **@Nhà sáng lập & Điều hành**\n"
+                "🛡️ **@Ban quản trị** – Quản lý CREW, xử lý vi phạm\n"
+                "💰 **@Tài chính** – Quản lý quỹ, thu chi\n"
+                "👥 **@Nhân sự** – Tuyển thành viên\n"
+                "📌 **@Quản lí** – Điều hành hoạt động crew\n"
+                "💎 **@Nhà tài trợ** – Hỗ trợ tài chính / tài nguyên\n"
+                "🎁 **@Donate** – Thành viên đóng góp tự nguyện\n"
+                "🏦 **@Lũ quỹ Ciara** – Những con quỹ của Ciara\n"
+                "🛠️ **@Outfix Ciara** – Sở hữu outfix\n"
+                "🔥 **@Thành viên tâm huyết** – Hoạt động tích cực , chơi ở crew lâu năm\n"
+                "✅ **@Chính thức** – Thành viên chính thức\n"
+                "🧪 **@Thực tập** – Giai đoạn thử việc"
+            ),
+            inline=False
+        )
 
-# ================= ROLE CREW =================
-embed.add_field(
-    name="🏷️ HỆ THỐNG CHỨC VỤ & XẾP HẠNG – LORD OF CIARA",
-    value=(
-        "👑 **@Nhà sáng lập & Điều hành**\n"
-        "🛡️ **@Ban quản trị** – Quản lý CREW, xử lý vi phạm\n"
-        "💰 **@Tài chính** – Quản lý quỹ, thu chi\n"
-        "👥 **@Nhân sự** – Tuyển thành viên\n"
-        "📌 **@Quản lí** – Điều hành hoạt động crew\n"
-        "💎 **@Nhà tài trợ** – Hỗ trợ tài chính / tài nguyên\n"
-        "🎁 **@Donate** – Thành viên đóng góp tự nguyện\n"
-        "🏦 **@Lũ quỹ Ciara** – Những con quỹ của Ciara\n"
-        "🛠️ **@Outfix Ciara** – Sở hữu outfix\n"
-        "🔥 **@Thành viên tâm huyết** – Hoạt động tích cực , chơi ở crew lâu năm\n"
-        "✅ **@Chính thức** – Thành viên chính thức\n"
-        "🧪 **@Thực tập** – Giai đoạn thử việc"
-    ),
-    inline=False
-)
+        await channel.send(
+            content="⚠️ **THÔNG BÁO QUAN TRỌNG**",
+            embed=embed
+        )
+
+    except Exception as e:
+        print("❌ Lỗi hourly_notification:", e)
+        traceback.print_exc()
 
 # ================= FOOTER =================
 embed.set_footer(
