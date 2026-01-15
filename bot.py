@@ -75,7 +75,6 @@ async def hourly_notification():
             timestamp=datetime.now()
         )
 
-        # ================= TUYỆT ĐỐI KHÔNG =================
         embed.add_field(
             name="❌ TUYỆT ĐỐI KHÔNG",
             value=(
@@ -87,7 +86,6 @@ async def hourly_notification():
             inline=False
         )
 
-        # ================= SCAM QUỸ =================
         embed.add_field(
             name="🚫 SCAM QUỸ / CHIẾM ĐOẠT QUỸ CHIẾM ĐÓNG",
             value=(
@@ -100,7 +98,6 @@ async def hourly_notification():
             inline=False
         )
 
-        # ================= LUÔN GHI NHỚ =================
         embed.add_field(
             name="✅ LUÔN GHI NHỚ",
             value=(
@@ -112,16 +109,15 @@ async def hourly_notification():
             inline=False
         )
 
-        # ================= ROLE CREW =================
         embed.add_field(
-            name="🏷️ HỆ THỐNG CHỨC VỤ & XẾP HẠNG – LORD OF CIARA",
+            name="🏷️ HỆ THỐNG CHỨC VỤ – LORD OF CIARA -",
             value=(
                 "👑 **@Nhà sáng lập & Điều hành**\n"
                 "🛡️ **@Ban quản trị** – Quản lý CREW, xử lý vi phạm\n"
                 "💰 **@Tài chính** – Quản lý quỹ, thu chi\n"
-                "👥 **@Nhân sự** – Tuyển thành viên\n"
-                "📌 **@Quản lí** – Điều hành hoạt động crew\n"
-                "💎 **@Nhà tài trợ** – Hỗ trợ tài chính / tài nguyên\n"
+                "👥 **@Nhân sự** – Tuyển thành viên , ql thành viên\n"
+                "📌 **@Quản lí** – Điều hành hoạt động sự kiện crew\n"
+                "💎 **@Nhà tài trợ** – Hỗ trợ tài tài nguyên CREW\n"
                 "🎁 **@Donate** – Thành viên đóng góp tự nguyện\n"
                 "🏦 **@Lũ quỹ Ciara** – Những con quỹ của Ciara\n"
                 "🛠️ **@Outfix Ciara** – Sở hữu outfix\n"
@@ -132,20 +128,9 @@ async def hourly_notification():
             inline=False
         )
 
-        await channel.send(
-            content="⚠️ **THÔNG BÁO QUAN TRỌNG**",
-            embed=embed
+        embed.set_footer(
+            text=" LORD OF CIARA | VUI LÒNG ĐỌC KĨ THÔNG BÁO | Tự ý giao dịch bị scam – BQT không chịu trách nhiệm"
         )
-
-    except Exception as e:
-        print("❌ Lỗi hourly_notification:", e)
-        traceback.print_exc()
-
-# ================= FOOTER =================
-embed.set_footer(
-    text="Crew LORD OF CIARA | Nói không với scam | Tự ý giao dịch bị scam – BQT không chịu trách nhiệm"
-)
-
 
         await channel.send(
             content="⚠️ **THÔNG BÁO QUAN TRỌNG**",
@@ -155,7 +140,7 @@ embed.set_footer(
         print("✅ Đã gửi thông báo tự động")
 
     except Exception as e:
-        print(f"❌ Lỗi hourly_notification: {e}")
+        print("❌ Lỗi hourly_notification:", e)
         traceback.print_exc()
 
 @hourly_notification.before_loop
@@ -197,6 +182,7 @@ class ThongBaoModal(discord.ui.Modal, title="🔔 GHI THÔNG BÁO CIARA"):
             "✅ Đã gửi thông báo thành công",
             ephemeral=True
         )
+
 @bot.tree.command(
     name="thongbao",
     description="Mở bảng nhập thông báo (form)"
@@ -210,7 +196,6 @@ async def thongbao(interaction: discord.Interaction):
         return
 
     await interaction.response.send_modal(ThongBaoModal())
-
 
 @bot.tree.command(name="on", description="Bật thông báo tự động")
 async def on_notify(interaction: discord.Interaction):
