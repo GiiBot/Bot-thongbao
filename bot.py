@@ -68,8 +68,8 @@ async def hourly_notification():
         if not channel:
             return
 
-    from datetime import datetime
-    import discord
+        from datetime import datetime
+        import discord
 
 embed = discord.Embed(
     title="🚨 CẢNH BÁO - LORD OF CIARA - 🚨",
